@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body {
+            text-align: center;
+            margin: 90px auto;
+            font-family: sans-serif;
+        }
+
+        label {
+            margin-left: 5px;
+        }
+    </style>
+    <title>מחשבון</title>
+</head>
+
+<body>
+    <form class="div">
+        <label for='num_of_days'>כמות ימים רגילים</label>
+        <input id='num_of_days' type="number" size="1" min="1" max="5" value="5">
+        <br>
+        <br>
+        <label for="day">שעות ביום רגיל</label>
+        <input id='day' type="number" size="1" min="1" max="9" value="8">
+        <br>
+        <br>
+        <label for="friday">שעות ביום שישי אם יש</label>
+        <input id='friday' type="number" size="1" min="1" max="5">
+        <br>
+        <br>
+        <label for="discount">הנחה</label>
+        <input id='discount' type="number" size="2" min="1" max='100' value="10">
+        <span>%</span>
+        <br>
+        <br>
+        <input id="button" type="button" value="חשב">
+        <input id="reset" type="reset">
+        <p id="result"></p>
+    </form>
+    <script>
+        button.addEventListener('click', () => { 
+
+            let friday = document.getElementById('friday').value || 0;
+            let discount = document.getElementById('discount').value || 0;
+            let week = num_of_days.value * day.value + Number(friday);
+            let year = week * 52 + Number(day.value);
+            let month = year / 12;
+            let priceForHour = 28.5 / 100 * 37;
+            let price = month * priceForHour - month * priceForHour / 100 * week;
+            price -= price / 100 * discount;
+            let hour = price / month;
+
+            result.innerHTML =
+                '<h5>מחיר לחודש:</h5>' +
+                Math.round(price) +
+                '<h5>מספר השעות סה"כ בחודש:</h5>' +
+                month.toFixed(2) +
+                '<h5>מחיר יוצא לשעה:</h5>' +
+                hour.toFixed(2);
+
+            reset.addEventListener('click', () => result.innerHTML = '');
+
+        });
+    </script>
+</body>
+
+</html>
